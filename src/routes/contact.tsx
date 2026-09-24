@@ -22,7 +22,8 @@ const SUBJECTS = [
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
-  const [subject, setSubject] = useState<(typeof SUBJECTS)[number]>("Commission");
+  const [subject, setSubject] =
+    useState<(typeof SUBJECTS)[number]>("Commission");
 
   return (
     <div>
@@ -34,13 +35,18 @@ function ContactPage() {
         />
         <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/55 to-ink/15" />
         <div className="relative z-10 mx-auto flex min-h-[72dvh] max-w-6xl flex-col justify-end px-5 pb-14 pt-52 md:px-8">
-          <p className="text-sm tracking-[0.3em] text-gilt uppercase">Richard Nuñez Art</p>
+          <p className="text-sm tracking-[0.3em] text-gilt uppercase">
+            Richard Nuñez Art
+          </p>
+
           <h1 className="mt-3 max-w-3xl font-display text-5xl md:text-6xl">
             Commissions, live work, auctions.
           </h1>
+
           <p className="mt-5 max-w-xl text-paper-dim">
             A commission, a live night, or a canvas for auction starts with a note.
           </p>
+
           <p className="mt-1 whitespace-nowrap text-sm text-paper-dim md:text-base">
             Artist Manager Michael Ulahannan takes it from here and brings it to Richard Nuñez.
           </p>
@@ -50,7 +56,10 @@ function ContactPage() {
       <div className="overflow-hidden border-y border-line bg-ink-2 py-3">
         <div className="animate-marquee flex w-max gap-10 pr-10">
           {[...SUBJECTS, ...SUBJECTS, ...SUBJECTS].map((word, i) => (
-            <span key={`${word}-${i}`} className="font-display text-xl italic text-gilt/80">
+            <span
+              key={`${word}-${i}`}
+              className="font-display text-xl italic text-gilt/80"
+            >
               {word}
               <span className="ml-10 text-ember">◆</span>
             </span>
@@ -68,26 +77,53 @@ function ContactPage() {
             />
           </Tilt>
         </div>
+
         <div className="md:col-span-7">
-          <p className="text-xs tracking-[0.3em] text-ember uppercase">The desk</p>
-          <h2 className="mt-3 font-display text-4xl">Write the manager.</h2>
-          <p className="mt-6 leading-relaxed text-paper-dim">{MANAGER.bio}</p>
+          <p className="text-xs tracking-[0.3em] text-ember uppercase">
+            The desk
+          </p>
+
+          <h2 className="mt-3 font-display text-4xl">
+            Write the manager.
+          </h2>
+
+          <p className="mt-6 leading-relaxed text-paper-dim">
+            {MANAGER.bio}
+          </p>
+
           <dl className="mt-8 grid gap-4 border-y border-line py-6 sm:grid-cols-3">
             <div>
-              <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">Role</dt>
-              <dd className="mt-1 font-display text-xl">{MANAGER.role}</dd>
+              <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">
+                Role
+              </dt>
+              <dd className="mt-1 font-display text-xl">
+                {MANAGER.role}
+              </dd>
             </div>
+
             <div>
-              <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">Age</dt>
-              <dd className="mt-1 font-display text-xl">{MANAGER.age}</dd>
+              <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">
+                Age
+              </dt>
+              <dd className="mt-1 font-display text-xl">
+                {MANAGER.age}
+              </dd>
             </div>
+
             <div>
-              <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">Studio</dt>
-              <dd className="mt-1 font-display text-xl">Dallas</dd>
+              <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">
+                Studio
+              </dt>
+              <dd className="mt-1 font-display text-xl">
+                Dallas
+              </dd>
             </div>
           </dl>
+
           <a
-            href={`mailto:${SITE.email}?subject=${encodeURIComponent("Management — " + MANAGER.name)}`}
+            href={`mailto:${SITE.email}?subject=${encodeURIComponent(
+              "Management — " + MANAGER.name,
+            )}`}
             className="mt-8 inline-flex min-h-11 items-center bg-gilt px-6 text-xs tracking-[0.2em] text-ink uppercase transition-transform duration-150 ease-out active:scale-[0.96]"
           >
             Email the studio
@@ -97,12 +133,22 @@ function ContactPage() {
 
       <section className="mx-auto grid max-w-6xl gap-12 px-5 pb-24 md:grid-cols-2 md:px-8">
         <div>
-          <p className="text-xs tracking-[0.3em] text-gilt uppercase">{MANAGER.role}</p>
-          <h2 className="mt-3 font-display text-2xl">{MANAGER.name}</h2>
+          <p className="text-xs tracking-[0.3em] text-gilt uppercase">
+            {MANAGER.role}
+          </p>
+
+          <h2 className="mt-3 font-display text-2xl">
+            {MANAGER.name}
+          </h2>
+
           <p className="mt-3 text-sm text-paper-dim">
             {MANAGER.age} years old. Richard Nuñez studio.
           </p>
-          <h3 className="mt-12 font-display text-2xl text-gilt">Past Charity Events Held</h3>
+
+          <h3 className="mt-12 font-display text-2xl text-gilt">
+            Past Charity Events Held
+          </h3>
+
           <ul className="mt-4 columns-1 gap-6 text-sm text-muted sm:columns-2">
             {CHARITIES.map((c) => (
               <li key={c} className="mb-2">
@@ -114,17 +160,61 @@ function ContactPage() {
 
         <form
           className="h-fit border border-line bg-ink-2 p-6 md:p-8"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
+
             const form = e.currentTarget;
             const data = new FormData(form);
-            const name = String(data.get("name") || "");
-            const email = String(data.get("email") || "");
-            const message = String(data.get("message") || "");
-            window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject + " — " + name)}&body=${encodeURIComponent(message + "\n\n" + email)}`;
-            setSent(true);
+
+            data.append(
+              "access_key",
+              import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+            );
+
+            data.append("subject", subject);
+            data.append("from_name", "Richard Nuñez Art Website");
+
+            try {
+              const response = await fetch(
+                "https://api.web3forms.com/submit",
+                {
+                  method: "POST",
+                  body: data,
+                },
+              );
+
+              const result = await response.json();
+
+              if (result.success) {
+                setSent(true);
+                form.reset();
+
+                const win = window as Window & {
+                  gtag?: (...args: unknown[]) => void;
+                };
+
+                if (typeof win.gtag === "function") {
+                  win.gtag("event", "generate_lead", {
+                    event_category: "contact",
+                    event_label: subject,
+                  });
+                }
+              } else {
+                console.error("Web3Forms error:", result);
+              }
+            } catch (error) {
+              console.error("Web3Forms error:", error);
+            }
           }}
         >
+          <input
+            type="checkbox"
+            name="botcheck"
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+
           <label className="block text-xs tracking-[0.16em] uppercase">
             Name
             <input
@@ -133,6 +223,7 @@ function ContactPage() {
               className="mt-2 h-12 w-full border border-line bg-ink px-3 text-paper outline-none focus:border-gilt"
             />
           </label>
+
           <label className="mt-5 block text-xs tracking-[0.16em] uppercase">
             Email
             <input
@@ -142,7 +233,11 @@ function ContactPage() {
               className="mt-2 h-12 w-full border border-line bg-ink px-3 text-paper outline-none focus:border-gilt"
             />
           </label>
-          <p className="mt-5 text-xs tracking-[0.16em] uppercase">Subject</p>
+
+          <p className="mt-5 text-xs tracking-[0.16em] uppercase">
+            Subject
+          </p>
+
           <div className="mt-2 flex flex-wrap gap-2">
             {SUBJECTS.map((s) => (
               <button
@@ -160,6 +255,7 @@ function ContactPage() {
               </button>
             ))}
           </div>
+
           <label className="mt-5 block text-xs tracking-[0.16em] uppercase">
             Message
             <textarea
@@ -169,11 +265,12 @@ function ContactPage() {
               className="mt-2 w-full border border-line bg-ink p-3 text-paper outline-none focus:border-gilt"
             />
           </label>
+
           <button
             type="submit"
             className="mt-6 min-h-12 w-full bg-ember text-sm tracking-[0.2em] text-paper uppercase transition-transform duration-150 ease-out active:scale-[0.96]"
           >
-            {sent ? "Opening mail" : "Send inquiry"}
+            {sent ? "Inquiry sent" : "Send inquiry"}
           </button>
         </form>
       </section>
