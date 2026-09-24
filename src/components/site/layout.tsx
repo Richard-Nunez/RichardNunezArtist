@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { StudioCursor } from "./cursor";
 import { Grain } from "./grain";
 import { ScrollProgress } from "./progress";
 import { SiteFooter } from "./footer";
@@ -10,7 +9,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     <div className="min-h-dvh bg-ink text-paper">
       <ScrollProgress />
       <Grain />
-      <StudioCursor />
+      
       <SiteNav />
       <main>{children}</main>
       <SiteFooter />

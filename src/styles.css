@@ -17,6 +17,16 @@
   --radius: 0.25rem;
   --ease-atelier: cubic-bezier(0.2, 0, 0, 1);
 }
+@media (pointer: fine) {
+  html,
+  body,
+  body * {
+    cursor:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='17' fill='none' stroke='%23c9a45c' stroke-width='1' stroke-opacity='.7'/%3E%3Ccircle cx='20' cy='20' r='3' fill='%23c9a45c'/%3E%3C/svg%3E")
+        20 20,
+      auto !important;
+  }
+}
 
 @layer base {
   html {
