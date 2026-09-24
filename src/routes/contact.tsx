@@ -161,51 +161,63 @@ function ContactPage() {
         <form
           className="h-fit border border-line bg-ink-2 p-6 md:p-8"
           onSubmit={async (e) => {
-            e.preventDefault();
+  e.preventDefault();
 
-            const form = e.currentTarget;
-            const data = new FormData(form);
+  const form = e.currentTarget;
+  const data = new FormData(form);
 
-            data.append(
-              "access_key",
-              import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
-            );
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
-            data.append("subject", subject);
-            data.append("from_name", "Richard Nuñez Art Website");
+  if (!accessKey) {
+    console.error("Web3Forms access key is missing.");
+    return;
+  }
 
-            try {
-              const response = await fetch(
-                "https://api.web3forms.com/submit",
-                {
-                  method: "POST",
-                  body: data,
-                },
-              );
+  data.append("access_key", accessKey);
+  data.append("subject", subject);
+  data.append("from_name", "Richard Nuñez Art Website");
 
-              const result = await response.json();
+  const object = Object.fromEntries(data);
+  const json = JSON.stringify(object);
 
-              if (result.success) {
-                setSent(true);
-                form.reset();
+  try {
+    const response = await fetch(
+      "https://api.web3forms.com/submit",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      },
+    );
 
-                const win = window as Window & {
-                  gtag?: (...args: unknown[]) => void;
-                };
+    const result = await response.json();
 
-                if (typeof win.gtag === "function") {
-                  win.gtag("event", "generate_lead", {
-                    event_category: "contact",
-                    event_label: subject,
-                  });
-                }
-              } else {
-                console.error("Web3Forms error:", result);
-              }
-            } catch (error) {
-              console.error("Web3Forms error:", error);
-            }
-          }}
+    console.log("Web3Forms response:", result);
+
+    if (result.success) {
+      setSent(true);
+      form.reset();
+
+      const win = window as Window & {
+        gtag?: (...args: unknown[]) => void;
+      };
+
+      if (typeof win.gtag === "function") {
+        win.gtag("event", "generate_lead", {
+          event_category: "contact",
+          event_label: subject,
+        });
+      }
+    } else {
+      console.error("Web3Forms error:", result);
+    }
+  } catch (error) {
+    console.error("Web3Forms error:", error);
+  }
+}}
         >
           <input
             type="checkbox"
