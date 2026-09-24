@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Richard Nunez Artist",
+      "hasCanvas": false,
+      "bodyTextLen": 2464,
+      "bodyTextHash": "4996ee0d3ceaeb937eaa1e19ba9515b74664e9c40686db4eb92a0177df6ec53a",
+      "bodyTextPrefix": "RICHARD·NUNEZ ATELIER WORKS LIFE STUDIO PRESS INQUIRE DALLAS · A",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Richard Nunez Artist",
+      "hasCanvas": false,
+      "bodyTextLen": 2452,
+      "bodyTextHash": "4a88e41a07817725d6568597ca42b0e37b3a5166c6346926bf96b85a3584bd6d",
+      "bodyTextPrefix": "RICHARD·NUNEZ Atelier Works Life Studio Press Inquire DALLAS · A",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
