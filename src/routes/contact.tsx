@@ -22,6 +22,8 @@ const SUBJECTS = [
 
 function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [formError, setFormError] = useState("");
   const [subject, setSubject] =
     useState<(typeof SUBJECTS)[number]>("Commission");
 
@@ -33,7 +35,9 @@ function ContactPage() {
           alt="Richard Nuñez"
           className="absolute inset-0 size-full object-cover object-[50%_35%]"
         />
+
         <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/55 to-ink/15" />
+
         <div className="relative z-10 mx-auto flex min-h-[72dvh] max-w-6xl flex-col justify-end px-5 pb-14 pt-52 md:px-8">
           <p className="text-sm tracking-[0.3em] text-gilt uppercase">
             Richard Nuñez Art
@@ -96,6 +100,7 @@ function ContactPage() {
               <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">
                 Role
               </dt>
+
               <dd className="mt-1 font-display text-xl">
                 {MANAGER.role}
               </dd>
@@ -105,6 +110,7 @@ function ContactPage() {
               <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">
                 Age
               </dt>
+
               <dd className="mt-1 font-display text-xl">
                 {MANAGER.age}
               </dd>
@@ -114,6 +120,7 @@ function ContactPage() {
               <dt className="text-[10px] tracking-[0.2em] text-muted uppercase">
                 Studio
               </dt>
+
               <dd className="mt-1 font-display text-xl">
                 Dallas
               </dd>
@@ -161,63 +168,101 @@ function ContactPage() {
         <form
           className="h-fit border border-line bg-ink-2 p-6 md:p-8"
           onSubmit={async (e) => {
-  e.preventDefault();
+            e.preventDefault();
 
-  const form = e.currentTarget;
-  const data = new FormData(form);
+            setSending(true);
+            setSent(false);
+            setFormError("");
 
-  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+            const form = e.currentTarget;
+            const data = new FormData(form);
 
-  if (!accessKey) {
-    console.error("Web3Forms access key is missing.");
-    return;
-  }
+            const accessKey =
+              import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
-  data.append("access_key", accessKey);
-  data.append("subject", subject);
-  data.append("from_name", "Richard Nuñez Art Website");
+            if (!accessKey) {
+              setSending(false);
+              setFormError(
+                "Form configuration error. Please try again later.",
+              );
 
-  const object = Object.fromEntries(data);
-  const json = JSON.stringify(object);
+              console.error(
+                "VITE_WEB3FORMS_ACCESS_KEY is missing.",
+              );
 
-  try {
-    const response = await fetch(
-      "https://api.web3forms.com/submit",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: json,
-      },
-    );
+              return;
+            }
 
-    const result = await response.json();
+            data.append("access_key", accessKey);
+            data.append("subject", subject);
+            data.append(
+              "from_name",
+              "Richard Nuñez Art Website",
+            );
 
-    console.log("Web3Forms response:", result);
+            try {
+              const object = Object.fromEntries(data);
+              const json = JSON.stringify(object);
 
-    if (result.success) {
-      setSent(true);
-      form.reset();
+              const response = await fetch(
+                "https://api.web3forms.com/submit",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                  },
+                  body: json,
+                },
+              );
 
-      const win = window as Window & {
-        gtag?: (...args: unknown[]) => void;
-      };
+              const result = await response.json();
 
-      if (typeof win.gtag === "function") {
-        win.gtag("event", "generate_lead", {
-          event_category: "contact",
-          event_label: subject,
-        });
-      }
-    } else {
-      console.error("Web3Forms error:", result);
-    }
-  } catch (error) {
-    console.error("Web3Forms error:", error);
-  }
-}}
+              console.log("Web3Forms response:", result);
+
+              if (result.success) {
+                setSent(true);
+                setFormError("");
+                form.reset();
+
+                const win = window as Window & {
+                  gtag?: (...args: unknown[]) => void;
+                };
+
+                if (typeof win.gtag === "function") {
+                  win.gtag("event", "generate_lead", {
+                    event_category: "contact",
+                    event_label: subject,
+                  });
+                }
+              } else {
+                setSent(false);
+
+                setFormError(
+                  result.message ||
+                    "Something went wrong. Please try again.",
+                );
+
+                console.error(
+                  "Web3Forms error:",
+                  result,
+                );
+              }
+            } catch (error) {
+              setSent(false);
+
+              setFormError(
+                "Something went wrong. Please try again.",
+              );
+
+              console.error(
+                "Web3Forms error:",
+                error,
+              );
+            } finally {
+              setSending(false);
+            }
+          }}
         >
           <input
             type="checkbox"
@@ -229,6 +274,7 @@ function ContactPage() {
 
           <label className="block text-xs tracking-[0.16em] uppercase">
             Name
+
             <input
               required
               name="name"
@@ -238,6 +284,7 @@ function ContactPage() {
 
           <label className="mt-5 block text-xs tracking-[0.16em] uppercase">
             Email
+
             <input
               required
               type="email"
@@ -270,6 +317,7 @@ function ContactPage() {
 
           <label className="mt-5 block text-xs tracking-[0.16em] uppercase">
             Message
+
             <textarea
               required
               name="message"
@@ -280,10 +328,27 @@ function ContactPage() {
 
           <button
             type="submit"
+            disabled={sending}
             className="mt-6 min-h-12 w-full bg-ember text-sm tracking-[0.2em] text-paper uppercase transition-transform duration-150 ease-out active:scale-[0.96]"
           >
-            {sent ? "Inquiry sent" : "Send inquiry"}
+            {sending
+              ? "Sending..."
+              : sent
+                ? "Inquiry sent"
+                : "Send inquiry"}
           </button>
+
+          {sent && (
+            <p className="mt-4 text-center text-sm text-gilt">
+              Your inquiry has been sent successfully.
+            </p>
+          )}
+
+          {formError && (
+            <p className="mt-4 text-center text-sm text-ember">
+              {formError}
+            </p>
+          )}
         </form>
       </section>
     </div>
