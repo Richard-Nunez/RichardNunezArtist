@@ -6,8 +6,57 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/book")({
   component: BookPage,
+
   head: () => ({
-    meta: [{ title: "’carnation — Matthew W. Bertsch & Richard Nuñez" }],
+    meta: [
+      {
+        title: "’carnation | Matthew W. Bertsch & Richard Nuñez",
+      },
+      {
+        name: "description",
+        content:
+          "Explore ’carnation, a collaboration between Matthew W. Bertsch and Richard Nuñez. Discover the book, available formats, its story, and the lives featured within.",
+      },
+
+      {
+        property: "og:title",
+        content: "’carnation | Matthew W. Bertsch & Richard Nuñez",
+      },
+      {
+        property: "og:description",
+        content:
+          "Discover ’carnation, a collaborative book featuring Matthew W. Bertsch and Richard Nuñez, with its story, formats, and featured lives.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/book",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "’carnation | Matthew W. Bertsch & Richard Nuñez",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Explore ’carnation, its story, available formats, and the collaboration between Matthew W. Bertsch and Richard Nuñez.",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/book",
+      },
+    ],
   }),
 });
 

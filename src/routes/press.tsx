@@ -6,8 +6,57 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/press")({
   component: PressPage,
+
   head: () => ({
-    meta: [{ title: "Press — Richard Nuñez" }],
+    meta: [
+      {
+        title: "Richard Nuñez Press | Articles, Features & Media",
+      },
+      {
+        name: "description",
+        content:
+          "Explore press coverage, articles, biographies, listings, and media featuring Dallas artist Richard Nuñez and his live acrylic work.",
+      },
+
+      {
+        property: "og:title",
+        content: "Richard Nuñez Press | Articles, Features & Media",
+      },
+      {
+        property: "og:description",
+        content:
+          "Browse press coverage, articles, biographies, listings, and media featuring Richard Nuñez and his work.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/press",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Richard Nuñez Press | Articles, Features & Media",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Explore articles, features, biographies, and media coverage of Richard Nuñez.",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/press",
+      },
+    ],
   }),
 });
 

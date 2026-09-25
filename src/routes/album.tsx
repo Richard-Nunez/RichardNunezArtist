@@ -6,8 +6,53 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/album")({
   component: AlbumPage,
+
   head: () => ({
-    meta: [{ title: "Hey Miranda — Mr. Really?!" }],
+    meta: [
+      {
+        title: "Hey Miranda — Mr. Really?! | Richard Nuñez",
+      },
+      {
+        name: "description",
+        content:
+          "Listen to previews from Hey Miranda — Mr. Really?! Explore the full tracklist and find the album on Spotify, Apple Music, Tidal, and other music platforms.",
+      },
+
+      {
+        property: "og:title",
+        content: "Hey Miranda — Mr. Really?! | Richard Nuñez",
+      },
+      {
+        property: "og:description",
+        content:
+          "Listen to previews from Hey Miranda — Mr. Really?! Explore the album tracklist and streaming links.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/album",
+      },
+      {
+        property: "og:type",
+        content: "music.album",
+      },
+
+      {
+        name: "twitter:title",
+        content: "Hey Miranda — Mr. Really?! | Richard Nuñez",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Listen to previews from Hey Miranda — Mr. Really?! and explore the complete album tracklist.",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/album",
+      },
+    ],
   }),
 });
 

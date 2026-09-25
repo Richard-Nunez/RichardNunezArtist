@@ -5,8 +5,57 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/studio")({
   component: StudioPage,
+
   head: () => ({
-    meta: [{ title: "Studio — Richard Nuñez" }],
+    meta: [
+      {
+        title: "Richard Nuñez Studio | Live Painting in Dallas",
+      },
+      {
+        name: "description",
+        content:
+          "Explore the studio life of Richard Nuñez, a Dallas artist known for live acrylic painting in public spaces, restaurants, galleries, and events.",
+      },
+
+      {
+        property: "og:title",
+        content: "Richard Nuñez Studio | Live Painting in Dallas",
+      },
+      {
+        property: "og:description",
+        content:
+          "Discover the places, rooms, and live painting settings that shape the studio practice of Dallas artist Richard Nuñez.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/studio",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Richard Nuñez Studio | Live Painting in Dallas",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Explore Richard Nuñez's studio life, live painting practice, and Dallas-based creative spaces.",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/studio",
+      },
+    ],
   }),
 });
 

@@ -6,8 +6,71 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
+
   head: () => ({
-    meta: [{ title: "Inquire — Richard Nuñez" }],
+    meta: [
+      {
+        title: "Contact Richard Nuñez | Commissions & Live Painting",
+      },
+      {
+        name: "description",
+        content:
+          "Contact Richard Nuñez Art for painting commissions, live painting, charity auctions, press inquiries, and management requests.",
+      },
+
+      {
+        property: "og:title",
+        content: "Contact Richard Nuñez | Commissions & Live Painting",
+      },
+      {
+        property: "og:description",
+        content:
+          "Get in touch with Richard Nuñez Art for commissions, live painting, charity auctions, press, and management inquiries.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/contact",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://richardnunezartist.com/images/inquire-hero.jpg",
+      },
+      {
+        property: "og:image:alt",
+        content: "Richard Nuñez Art contact and inquiry page",
+      },
+
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Contact Richard Nuñez | Commissions & Live Painting",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Contact Richard Nuñez Art for commissions, live painting, charity auctions, press, and management inquiries.",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://richardnunezartist.com/images/inquire-hero.jpg",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/contact",
+      },
+    ],
   }),
 });
 

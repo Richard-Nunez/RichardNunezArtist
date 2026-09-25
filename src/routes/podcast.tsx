@@ -6,8 +6,55 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/podcast")({
   component: PodcastPage,
+
   head: () => ({
-    meta: [{ title: "The Really Podcast — Richard Nuñez" }],
+    meta: [
+      {
+        title: "The Really Podcast | Richard Nuñez",
+      },
+      {
+        name: "description",
+        content:
+          "Watch The Really Podcast with Richard Nuñez, featuring conversations and videos about faith, art, life, soul, music, and creativity.",
+      },
+      {
+        property: "og:title",
+        content: "The Really Podcast | Richard Nuñez",
+      },
+      {
+        property: "og:description",
+        content:
+          "Watch The Really Podcast with Richard Nuñez and explore episodes about faith, art, life, soul, music, and creativity.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/podcast",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "The Really Podcast | Richard Nuñez",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Watch The Really Podcast with Richard Nuñez and explore conversations about faith, art, life, soul, music, and creativity.",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/podcast",
+      },
+    ],
   }),
 });
 
@@ -23,7 +70,9 @@ const MARQUEE = [
 ];
 
 function PodcastPage() {
-  const [activeId, setActiveId] = useState(VODS[0].id);
+  const [activeId, setActiveId] =
+    useState<(typeof VODS)[number]["id"]>(VODS[0].id);
+
   const active = VODS.find((v) => v.id === activeId) ?? VODS[0];
 
   return (
@@ -34,16 +83,26 @@ function PodcastPage() {
           alt=""
           className="absolute inset-0 size-full object-cover object-top opacity-55"
         />
+
         <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/70 to-ink/35" />
+
         <div className="relative z-10 mx-auto flex min-h-[70dvh] max-w-6xl flex-col justify-end px-5 pb-14 md:px-8">
           <p className="flex items-center gap-2 text-xs tracking-[0.3em] text-gilt uppercase">
             On Kick
           </p>
-          <h1 className="mt-3 font-display text-5xl leading-[0.92] md:text-7xl">{SHOW.name}</h1>
+
+          <h1 className="mt-3 font-display text-5xl leading-[0.92] md:text-7xl">
+            {SHOW.name}
+          </h1>
+
           <p className="mt-4 max-w-2xl font-display text-2xl italic text-paper-dim">
             {SHOW.host}. Self-taught artist. Comedian.
           </p>
-          <p className="mt-5 max-w-2xl leading-relaxed text-paper-dim">{SHOW.bio}</p>
+
+          <p className="mt-5 max-w-2xl leading-relaxed text-paper-dim">
+            {SHOW.bio}
+          </p>
+
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href={SHOW.kick}
@@ -54,6 +113,7 @@ function PodcastPage() {
               <Radio className="size-4" />
               Watch on Kick
             </a>
+
             <a
               href={SHOW.linktree}
               target="_blank"
@@ -70,7 +130,10 @@ function PodcastPage() {
       <div className="overflow-hidden border-y border-line bg-ink-2 py-3">
         <div className="animate-marquee flex w-max gap-10 pr-10">
           {[...MARQUEE, ...MARQUEE].map((word, i) => (
-            <span key={`${word}-${i}`} className="font-display text-xl italic text-gilt/80">
+            <span
+              key={`${word}-${i}`}
+              className="font-display text-xl italic text-gilt/80"
+            >
               {word}
               <span className="ml-10 text-ember">◆</span>
             </span>
@@ -78,12 +141,21 @@ function PodcastPage() {
         </div>
       </div>
 
-      <section id="stage" className="mx-auto max-w-6xl scroll-mt-32 px-5 py-16 md:px-8">
+      <section
+        id="stage"
+        className="mx-auto max-w-6xl scroll-mt-32 px-5 py-16 md:px-8"
+      >
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <p className="text-xs tracking-[0.3em] text-gilt uppercase">On this page</p>
-            <h2 className="mt-2 font-display text-4xl">{active.title}</h2>
+            <p className="text-xs tracking-[0.3em] text-gilt uppercase">
+              On this page
+            </p>
+
+            <h2 className="mt-2 font-display text-4xl">
+              {active.title}
+            </h2>
           </div>
+
           <span className="eq hidden md:inline-flex" aria-hidden>
             <i />
             <i />
@@ -92,6 +164,7 @@ function PodcastPage() {
             <i />
           </span>
         </div>
+
         <div className="overflow-hidden border border-line bg-ink-3">
           <iframe
             key={active.id}
@@ -103,9 +176,15 @@ function PodcastPage() {
             allowFullScreen
           />
         </div>
+
         <p className="mt-4 text-sm text-muted">
           Pick a night below. No Kick account needed. Open the channel at{" "}
-          <a href={SHOW.kick} className="text-gilt hover:text-gilt-bright" target="_blank" rel="noopener">
+          <a
+            href={SHOW.kick}
+            className="text-gilt hover:text-gilt-bright"
+            target="_blank"
+            rel="noopener"
+          >
             kick.com/thereallypodcast
           </a>
           .
@@ -120,13 +199,25 @@ function PodcastPage() {
             className="aspect-4/5 w-full border border-gilt/40 object-cover object-[50%_20%]"
           />
         </div>
+
         <div className="md:col-span-7">
-          <p className="text-xs tracking-[0.3em] text-ember uppercase">{SHOW.verse}</p>
-          <h2 className="mt-3 font-display text-4xl">Faith. Art. Life. Soul.</h2>
+          <p className="text-xs tracking-[0.3em] text-ember uppercase">
+            {SHOW.verse}
+          </p>
+
+          <h2 className="mt-3 font-display text-4xl">
+            Faith. Art. Life. Soul.
+          </h2>
+
           <blockquote className="mt-6 font-display text-2xl italic leading-snug text-paper">
-            “All of the aspects of my Faith, Art, Life and Soul are here to entertain you.”
+            “All of the aspects of my Faith, Art, Life and Soul are here to
+            entertain you.”
           </blockquote>
-          <p className="mt-6 leading-relaxed text-paper-dim">{SHOW.bio}</p>
+
+          <p className="mt-6 leading-relaxed text-paper-dim">
+            {SHOW.bio}
+          </p>
+
           <div className="mt-8 flex flex-wrap gap-2">
             {SHOW.links.map((link) => (
               <a
@@ -144,7 +235,10 @@ function PodcastPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16 md:px-8">
-        <h2 className="font-display text-3xl">Recent nights</h2>
+        <h2 className="font-display text-3xl">
+          Recent nights
+        </h2>
+
         <ul className="mt-8 grid gap-6 md:grid-cols-2">
           {VODS.map((vod) => (
             <li key={vod.id}>
@@ -152,11 +246,19 @@ function PodcastPage() {
                 type="button"
                 onClick={() => {
                   setActiveId(vod.id);
-                  document.getElementById("stage")?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                  document
+                    .getElementById("stage")
+                    ?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
                 }}
                 className={cn(
                   "group grid w-full gap-4 border bg-ink-2 p-3 text-left transition-colors sm:grid-cols-5",
-                  activeId === vod.id ? "border-gilt" : "border-line hover:border-gilt",
+                  activeId === vod.id
+                    ? "border-gilt"
+                    : "border-line hover:border-gilt",
                 )}
               >
                 <div className="relative aspect-video overflow-hidden bg-ink-3 sm:col-span-2">
@@ -165,24 +267,36 @@ function PodcastPage() {
                     alt=""
                     className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
+
                   <span className="absolute right-2 bottom-2 bg-ink/80 px-2 py-0.5 text-[10px] tracking-[0.14em] text-paper uppercase">
                     {vod.duration}
                   </span>
                 </div>
+
                 <div className="flex flex-col justify-center sm:col-span-3 sm:pr-2">
-                  <p className="text-xs tracking-[0.16em] text-muted uppercase">{vod.date}</p>
+                  <p className="text-xs tracking-[0.16em] text-muted uppercase">
+                    {vod.date}
+                  </p>
+
                   <h3 className="mt-2 font-display text-xl leading-snug group-hover:text-gilt">
                     {vod.title}
                   </h3>
-                  <p className="mt-2 text-xs text-muted">{vod.views} views on Kick</p>
+
+                  <p className="mt-2 text-xs text-muted">
+                    {vod.views} views on Kick
+                  </p>
                 </div>
               </button>
             </li>
           ))}
         </ul>
+
         <p className="mt-10 text-sm text-muted">
           Album nights:{" "}
-          <Link to="/album" className="text-gilt hover:text-gilt-bright">
+          <Link
+            to="/album"
+            className="text-gilt hover:text-gilt-bright"
+          >
             Hey Miranda
           </Link>
         </p>

@@ -6,7 +6,60 @@ import { IconMarquee } from "@/components/site/marquee";
 import { Reveal } from "@/components/site/reveal";
 import { PRESS, STATS, WORKS } from "@/data/site";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  component: Home,
+
+  head: () => ({
+    meta: [
+      {
+        title:
+          "Richard Nuñez | Dallas Artist, Live Painter & Contemporary Art",
+      },
+      {
+        name: "description",
+        content:
+          "Official website of Richard Nuñez, a self-taught Dallas artist known for acrylic paintings, live painting, commissioned artwork, and charity events.",
+      },
+
+      {
+        property: "og:title",
+        content:
+          "Richard Nuñez | Dallas Artist, Live Painter & Contemporary Art",
+      },
+      {
+        property: "og:description",
+        content:
+          "Explore the work of Dallas artist Richard Nuñez, including acrylic paintings, live painting, commissions, charity events, and selected press.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+
+      {
+        name: "twitter:title",
+        content:
+          "Richard Nuñez | Dallas Artist, Live Painter & Contemporary Art",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Explore acrylic paintings, live painting, commissions, charity events, and the work of Dallas artist Richard Nuñez.",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/",
+      },
+    ],
+  }),
+});
 
 function StaggerLine({ text, className }: { text: string; className?: string }) {
   return (

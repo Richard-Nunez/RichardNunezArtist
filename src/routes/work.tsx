@@ -7,8 +7,57 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/work")({
   component: WorkPage,
+
   head: () => ({
-    meta: [{ title: "Works — Richard Nuñez" }],
+    meta: [
+      {
+        title: "Richard Nuñez Artwork | Acrylic Paintings & Original Works",
+      },
+      {
+        name: "description",
+        content:
+          "Explore original acrylic paintings by Richard Nuñez, including selected works and series from the Dallas artist's studio.",
+      },
+
+      {
+        property: "og:title",
+        content: "Richard Nuñez Artwork | Acrylic Paintings & Original Works",
+      },
+      {
+        property: "og:description",
+        content:
+          "Browse original acrylic paintings, selected works, and art series by Dallas artist Richard Nuñez.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/work",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Richard Nuñez Artwork | Acrylic Paintings & Original Works",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Explore original acrylic paintings and selected works by Richard Nuñez.",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/work",
+      },
+    ],
   }),
 });
 

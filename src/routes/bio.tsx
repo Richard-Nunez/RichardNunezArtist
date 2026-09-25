@@ -5,8 +5,71 @@ import { ATHLETES, TIMELINE } from "@/data/site";
 
 export const Route = createFileRoute("/bio")({
   component: BioPage,
+
   head: () => ({
-    meta: [{ title: "Life — Richard Nuñez" }],
+    meta: [
+      {
+        title: "Richard Nuñez Biography | Dallas Artist",
+      },
+      {
+        name: "description",
+        content:
+          "Discover the life and career of Richard Nuñez, a self-taught Dallas–Fort Worth artist known for acrylic painting, live art, iconic portraits, and charity work.",
+      },
+
+      {
+        property: "og:title",
+        content: "Richard Nuñez Biography | Dallas Artist",
+      },
+      {
+        property: "og:description",
+        content:
+          "Explore the life, career, studio years, live painting, and artistic journey of Dallas–Fort Worth artist Richard Nuñez.",
+      },
+      {
+        property: "og:url",
+        content: "https://richardnunezartist.com/bio",
+      },
+      {
+        property: "og:type",
+        content: "profile",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://richardnunezartist.com/images/nunez-portrait.jpg",
+      },
+      {
+        property: "og:image:alt",
+        content: "Portrait of artist Richard Nuñez",
+      },
+
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Richard Nuñez Biography | Dallas Artist",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Explore the life, career, and artistic journey of Dallas–Fort Worth artist Richard Nuñez.",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://richardnunezartist.com/images/nunez-portrait.jpg",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://richardnunezartist.com/bio",
+      },
+    ],
   }),
 });
 
