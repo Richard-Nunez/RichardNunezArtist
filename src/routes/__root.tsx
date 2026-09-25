@@ -139,6 +139,19 @@ export const Route = createRootRoute({
 
     scripts: [
       {
+  src: "https://www.googletagmanager.com/gtag/js?id=G-6FJN4MDZM9",
+  async: true,
+},
+{
+  children: `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-6FJN4MDZM9');
+  `,
+},
+      {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
