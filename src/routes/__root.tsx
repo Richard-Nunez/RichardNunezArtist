@@ -21,10 +21,7 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      {
-  name: "msvalidate.01",
-  content: "4ED661014A1783D61422F91CA02D7AD6",
-},
+      
 
       {
         title: APP_NAME,
