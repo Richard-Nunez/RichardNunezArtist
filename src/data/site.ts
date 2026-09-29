@@ -4,7 +4,7 @@ export const SITE = {
   domain: "richardnunezartist.com",
   tagline: "Live acrylic. Icons. Dallas light.",
   email: "studio@richardnunezartist.com",
-  instagram: "https://www.instagram.com/nunezart1/",
+  instagram: "https://www.instagram.com/thereallypodcast_/",
   wikipedia: "https://en.wikipedia.org/wiki/Richard_Nunez_(artist)",
 } as const;
 
