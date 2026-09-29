@@ -24,7 +24,7 @@ export function SiteFooter() {
           <p className="tracking-[0.18em] text-gilt uppercase">Atelier</p>
           <p className="mt-3">{SITE.domain}</p>
           <a className="mt-1 block hover:text-gilt" href={SITE.instagram}>
-            Instagram @nunezart1
+            Instagram @thereallypodcast_
           </a>
         </div>
       </div>

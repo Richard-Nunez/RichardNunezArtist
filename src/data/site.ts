@@ -9,7 +9,7 @@ export const SITE = {
 } as const;
 
 export const SOCIALS = [
-  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/nunezart1/" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/thereallypodcast_/" },
   { id: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=61572478822009" },
   { id: "youtube", label: "YouTube", href: "https://www.youtube.com/@thereallypodcast" },
   { id: "x", label: "X", href: "https://x.com/thereallypodcst" },
