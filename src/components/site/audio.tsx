@@ -30,7 +30,11 @@ const PLAYLIST = [
 
 export function SiteAudio() {
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  // true = music should be playing
+  // false = visitor intentionally paused it
   const wantPlay = useRef(true);
+
   const mutedRef = useRef(false);
 
   const [index, setIndex] = useState(0);
@@ -38,6 +42,23 @@ export function SiteAudio() {
   const [playing, setPlaying] = useState(false);
 
   const track = PLAYLIST[index];
+
+  const tryPlay = () => {
+    const el = audioRef.current;
+
+    if (!el || !wantPlay.current) return;
+
+    void el
+      .play()
+      .then(() => {
+        setPlaying(true);
+      })
+      .catch(() => {
+        // Browser blocked autoplay.
+        // We'll try again after the visitor interacts.
+        setPlaying(false);
+      });
+  };
 
   const go = (dir: -1 | 1) => {
     wantPlay.current = true;
@@ -49,6 +70,9 @@ export function SiteAudio() {
     );
   };
 
+  /*
+   * Load the selected track and immediately attempt autoplay.
+   */
   useEffect(() => {
     const el = audioRef.current;
 
@@ -58,31 +82,29 @@ export function SiteAudio() {
     el.muted = mutedRef.current;
     el.load();
 
-    if (!wantPlay.current) return;
-
-    void el
-      .play()
-      .then(() => setPlaying(true))
-      .catch(() => setPlaying(false));
+    tryPlay();
   }, [track.preview]);
 
+  /*
+   * Browser fallback:
+   * If autoplay was blocked, start on the visitor's first
+   * normal click/tap/key press.
+   *
+   * If the visitor manually paused, wantPlay is false,
+   * so normal interaction will NOT restart the music.
+   */
   useEffect(() => {
-    const onPause = () => {
-      wantPlay.current = false;
-
-      audioRef.current?.pause();
-      setPlaying(false);
-    };
-
-    const resume = () => {
+    const resume = (event: Event) => {
       const el = audioRef.current;
 
-      if (
-        !el ||
-        !wantPlay.current ||
-        !el.paused ||
-        mutedRef.current
-      ) {
+      if (!el || !wantPlay.current || !el.paused) {
+        return;
+      }
+
+      // Don't intercept clicks on the music-player controls.
+      const target = event.target as HTMLElement | null;
+
+      if (target?.closest("[data-site-audio-control]")) {
         return;
       }
 
@@ -92,25 +114,37 @@ export function SiteAudio() {
         .catch(() => setPlaying(false));
     };
 
-    window.addEventListener(
-      "site-audio-pause",
-      onPause,
-    );
+    /*
+     * Album previews / Snaps videos can dispatch this event
+     * so two pieces of audio don't play at once.
+     */
+    const pauseForOtherMedia = () => {
+      wantPlay.current = false;
+
+      const el = audioRef.current;
+
+      if (el) {
+        el.pause();
+      }
+
+      setPlaying(false);
+    };
+
+    window.addEventListener("pointerdown", resume);
+    window.addEventListener("keydown", resume);
 
     window.addEventListener(
-      "pointerdown",
-      resume,
+      "site-audio-pause",
+      pauseForOtherMedia,
     );
 
     return () => {
-      window.removeEventListener(
-        "site-audio-pause",
-        onPause,
-      );
+      window.removeEventListener("pointerdown", resume);
+      window.removeEventListener("keydown", resume);
 
       window.removeEventListener(
-        "pointerdown",
-        resume,
+        "site-audio-pause",
+        pauseForOtherMedia,
       );
     };
   }, []);
@@ -120,7 +154,8 @@ export function SiteAudio() {
 
     if (!el) return;
 
-    if (playing) {
+    if (!el.paused) {
+      // User manually paused the music.
       wantPlay.current = false;
 
       el.pause();
@@ -129,6 +164,7 @@ export function SiteAudio() {
       return;
     }
 
+    // User manually pressed Play.
     wantPlay.current = true;
 
     void el
@@ -138,30 +174,27 @@ export function SiteAudio() {
   };
 
   const toggleMute = () => {
+    const el = audioRef.current;
+
+    if (!el) return;
+
     const next = !mutedRef.current;
 
     mutedRef.current = next;
     setMuted(next);
 
-    if (audioRef.current) {
-      audioRef.current.muted = next;
-    }
-
-    if (!next && !playing) {
-      wantPlay.current = true;
-
-      void audioRef.current
-        ?.play()
-        .then(() => setPlaying(true))
-        .catch(() => setPlaying(false));
-    }
+    el.muted = next;
   };
 
   return (
     <div className="fixed right-3 bottom-3 z-40 flex items-center gap-1 border border-line bg-ink/90 px-1.5 py-1 backdrop-blur-md md:right-5 md:bottom-5">
       <audio
         ref={audioRef}
+        autoPlay
+        playsInline
         preload="auto"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
         onEnded={() => go(1)}
       />
 
@@ -183,6 +216,7 @@ export function SiteAudio() {
 
       <button
         type="button"
+        data-site-audio-control
         className="flex size-8 items-center justify-center text-paper"
         aria-label="Previous track"
         onClick={() => go(-1)}
@@ -192,6 +226,7 @@ export function SiteAudio() {
 
       <button
         type="button"
+        data-site-audio-control
         className="flex size-8 items-center justify-center bg-gilt text-ink"
         aria-label={playing ? "Pause" : "Play"}
         onClick={togglePlay}
@@ -205,6 +240,7 @@ export function SiteAudio() {
 
       <button
         type="button"
+        data-site-audio-control
         className="flex size-8 items-center justify-center text-paper"
         aria-label="Next track"
         onClick={() => go(1)}
@@ -214,6 +250,7 @@ export function SiteAudio() {
 
       <button
         type="button"
+        data-site-audio-control
         className="flex size-8 items-center justify-center text-paper"
         aria-label={muted ? "Unmute" : "Mute"}
         onClick={toggleMute}
