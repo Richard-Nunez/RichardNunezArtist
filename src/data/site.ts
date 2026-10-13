@@ -3640,6 +3640,48 @@ export const LOVE_TRACKS = [
   { n: 15, title: "Love For You", time: "1:34", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/db/8b/19/db8b1993-51a4-12e8-953e-48a11273302a/mzaf_15020396782506679022.plus.aac.p.m4a" },
 ] as const;
 
+export const LETS_DANCE = {
+  artist: "Mr. Really?!",
+  title: "Hey Miranda, Let's Dance",
+  released: "",
+  genre: "",
+  label: "",
+  copyright: "",
+  tracks: 15,
+  cover: "/images/hey-miranda-lets-dance-cover.png",
+
+  stores: [
+    {
+      id: "tidal",
+      label: "Tidal",
+      href: "https://tidal.com/album/562782462",
+    },
+    {
+      id: "apple",
+      label: "Apple Music",
+      href: "https://music.apple.com/us/album/hey-miranda-lets-dance/6814249199",
+    },
+  ],
+} as const;
+
+export const LETS_DANCE_TRACKS = [
+  { n: 1, title: "Backseat Blues", time: "1:44", preview: "" },
+  { n: 2, title: "Just Being Blunt", time: "1:07", preview: "" },
+  { n: 3, title: "PUNK'D", time: "0:44", preview: "" },
+  { n: 4, title: "Busted In Vienna", time: "0:44", preview: "" },
+  { n: 5, title: "Call My Mom", time: "0:51", preview: "" },
+  { n: 6, title: "Call My Lawyer", time: "0:53", preview: "" },
+  { n: 7, title: "Pleading The 5th", time: "0:42", preview: "" },
+  { n: 8, title: "Help Me Jesus", time: "1:09", preview: "" },
+  { n: 9, title: "Hey Ernesto", time: "0:43", preview: "" },
+  { n: 10, title: "Hawaiian Five-O", time: "1:18", preview: "" },
+  { n: 11, title: "Guilty", time: "0:47", preview: "" },
+  { n: 12, title: "Too Many Beers", time: "0:50", preview: "" },
+  { n: 13, title: "Take Me Away", time: "0:47", preview: "" },
+  { n: 14, title: "Smooth Criminals", time: "1:27", preview: "" },
+  { n: 15, title: "Taser Rock", time: "1:24", preview: "" },
+] as const;
+
 export const SHOW = {
   name: "The Really Podcast",
   host: "Richard Nuñez",

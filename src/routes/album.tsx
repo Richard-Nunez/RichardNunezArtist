@@ -1,7 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { LOVE, LOVE_TRACKS, RECORD, TRACKS } from "@/data/site";
+import {
+  LOVE,
+  LOVE_TRACKS,
+  LETS_DANCE,
+  LETS_DANCE_TRACKS,
+  RECORD,
+  TRACKS,
+} from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/album")({
@@ -19,10 +26,11 @@ function formatTime(sec: number) {
 }
 
 function AlbumPage() {
-  const albums = [
-    { record: LOVE, tracks: LOVE_TRACKS },
-    { record: RECORD, tracks: TRACKS },
-  ] as const;
+ const albums = [
+  { record: LOVE, tracks: LOVE_TRACKS },
+  { record: LETS_DANCE, tracks: LETS_DANCE_TRACKS },
+  { record: RECORD, tracks: TRACKS },
+] as const;
   const audioRef = useRef<HTMLAudioElement>(null);
   const [album, setAlbum] = useState(0);
   const [index, setIndex] = useState(0);
