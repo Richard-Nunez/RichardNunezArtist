@@ -1,58 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { RECORD, TRACKS } from "@/data/site";
+import { LOVE, LOVE_TRACKS, RECORD, TRACKS } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/album")({
   component: AlbumPage,
-
   head: () => ({
-    meta: [
-      {
-        title: "Hey Miranda — Mr. Really?! | Richard Nuñez",
-      },
-      {
-        name: "description",
-        content:
-          "Listen to previews from Hey Miranda — Mr. Really?! Explore the full tracklist and find the album on Spotify, Apple Music, Tidal, and other music platforms.",
-      },
-
-      {
-        property: "og:title",
-        content: "Hey Miranda — Mr. Really?! | Richard Nuñez",
-      },
-      {
-        property: "og:description",
-        content:
-          "Listen to previews from Hey Miranda — Mr. Really?! Explore the album tracklist and streaming links.",
-      },
-      {
-        property: "og:url",
-        content: "https://richardnunezartist.com/album",
-      },
-      {
-        property: "og:type",
-        content: "music.album",
-      },
-
-      {
-        name: "twitter:title",
-        content: "Hey Miranda — Mr. Really?! | Richard Nuñez",
-      },
-      {
-        name: "twitter:description",
-        content:
-          "Listen to previews from Hey Miranda — Mr. Really?! and explore the complete album tracklist.",
-      },
-    ],
-
-    links: [
-      {
-        rel: "canonical",
-        href: "https://richardnunezartist.com/album",
-      },
-    ],
+    meta: [{ title: "Love Never Fails — Mr. Really?!" }],
   }),
 });
 
@@ -64,12 +19,20 @@ function formatTime(sec: number) {
 }
 
 function AlbumPage() {
+  const albums = [
+    { record: LOVE, tracks: LOVE_TRACKS },
+    { record: RECORD, tracks: TRACKS },
+  ] as const;
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [album, setAlbum] = useState(0);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const track = TRACKS[index];
+  const current = albums[album];
+  const tracks = current.tracks;
+  const record = current.record;
+  const track = tracks[index];
 
   useEffect(() => {
     const el = audioRef.current;
@@ -80,13 +43,15 @@ function AlbumPage() {
     if (playing) {
       void el.play().catch(() => setPlaying(false));
     }
-  }, [index]);
+  }, [track.preview]);
 
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
-    if (playing) void el.play().catch(() => setPlaying(false));
-    else el.pause();
+    if (playing) {
+      window.dispatchEvent(new Event("site-audio-pause"));
+      void el.play().catch(() => setPlaying(false));
+    } else el.pause();
   }, [playing]);
 
   const playAt = (i: number) => {
@@ -98,8 +63,15 @@ function AlbumPage() {
     setPlaying(true);
   };
 
-  const next = () => setIndex((i) => (i + 1) % TRACKS.length);
-  const prev = () => setIndex((i) => (i - 1 + TRACKS.length) % TRACKS.length);
+  const next = () => setIndex((i) => (i + 1) % tracks.length);
+  const prev = () => setIndex((i) => (i - 1 + tracks.length) % tracks.length);
+
+  const chooseAlbum = (i: number) => {
+    setAlbum(i);
+    setIndex(0);
+    setPlaying(false);
+    setProgress(0);
+  };
 
   return (
     <div className="pt-52">
@@ -109,14 +81,14 @@ function AlbumPage() {
         onTimeUpdate={(e) => setProgress(e.currentTarget.currentTime)}
         onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
         onEnded={() => {
-          setIndex((i) => (i + 1) % TRACKS.length);
+          setIndex((i) => (i + 1) % tracks.length);
           setPlaying(true);
         }}
       />
 
       <div className="overflow-hidden border-y border-line bg-ink-2 py-3">
         <div className="animate-marquee flex w-max gap-10 pr-10">
-          {[...TRACKS, ...TRACKS].map((t, i) => (
+          {[...tracks, ...tracks].map((t, i) => (
             <span key={`${t.n}-${i}`} className="font-display text-xl italic text-gilt/80">
               {t.title}
               <span className="ml-10 text-ember">◆</span>
@@ -144,8 +116,8 @@ function AlbumPage() {
             aria-label={playing ? "Pause preview" : "Play preview"}
           >
             <img
-              src={RECORD.cover}
-              alt={`${RECORD.title} cover`}
+              src={record.cover}
+              alt={`${record.title} cover`}
               className={cn(
                 "size-full object-cover transition-transform duration-700",
                 playing && "scale-105",
@@ -161,14 +133,33 @@ function AlbumPage() {
 
         <div>
           <p className="text-xs tracking-[0.3em] text-gilt uppercase">Album</p>
-          <h1 className="mt-3 font-display text-5xl md:text-7xl">{RECORD.title}</h1>
-          <p className="mt-3 font-display text-2xl italic text-paper-dim">{RECORD.artist}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {albums.map((item, i) => (
+              <button
+                key={item.record.title}
+                type="button"
+                onClick={() => chooseAlbum(i)}
+                className={cn(
+                  "min-h-11 px-4 text-xs tracking-[0.16em] uppercase transition-colors",
+                  i === album
+                    ? "bg-gilt text-ink"
+                    : "border border-line text-paper-dim hover:border-gilt",
+                )}
+              >
+                {item.record.title}
+              </button>
+            ))}
+          </div>
+          <h1 className="mt-5 font-display text-5xl md:text-7xl">{record.title}</h1>
+          <p className="mt-3 font-display text-2xl italic text-paper-dim">{record.artist}</p>
           <p className="mt-5 text-sm tracking-[0.16em] text-muted uppercase">
-            {RECORD.released} · {RECORD.tracks} tracks · {RECORD.genre}
+            {record.released} · {record.tracks} tracks · {record.genre}
           </p>
           <p className="mt-4 max-w-md text-paper-dim">
-            Click a track to hear the preview. Full album on Tidal, Spotify, Apple
-            Music, and the rest.
+            Click a track to hear the preview.
+            {record.stores.length > 1
+              ? " Full album on Tidal, Spotify, Apple Music, and the rest."
+              : " Full album on Apple Music."}
           </p>
 
           <div className="mt-8 flex items-center gap-3">
@@ -221,7 +212,7 @@ function AlbumPage() {
           </div>
 
           <div className="mt-10 flex flex-wrap gap-2">
-            {RECORD.stores.map((store) => (
+            {record.stores.map((store) => (
               <a
                 key={store.id}
                 href={store.href}
@@ -239,7 +230,7 @@ function AlbumPage() {
       <section className="mx-auto max-w-5xl px-5 pb-24 md:px-8">
         <h2 className="font-display text-3xl">Tracklist</h2>
         <ol className="mt-8 divide-y divide-line border-y border-line">
-          {TRACKS.map((t, i) => {
+          {tracks.map((t, i) => {
             const on = i === index;
             return (
               <li key={t.n}>
@@ -268,7 +259,7 @@ function AlbumPage() {
           })}
         </ol>
         <p className="mt-8 text-xs tracking-[0.16em] text-muted uppercase">
-          {RECORD.copyright}
+          {record.copyright}
         </p>
       </section>
     </div>

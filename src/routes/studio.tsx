@@ -99,7 +99,7 @@ function StudioPage() {
           />
           <div className="p-8">
             <p className="text-xs tracking-[0.2em] text-gilt uppercase">Instagram</p>
-            <h2 className="mt-3 font-display text-3xl">@nunezart1</h2>
+            <h2 className="mt-3 font-display text-3xl">@thereallypodcast_</h2>
             <p className="mt-4 max-w-xl text-paper-dim">
               Richard Nuñez paints live, in acrylic, in front of the room. Follow
               the studio for the work, the nights, and what’s on the easel.

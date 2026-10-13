@@ -16,6 +16,7 @@ import { Route as BookRouteImport } from './routes/book'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PodcastRouteImport } from './routes/podcast'
 import { Route as PressRouteImport } from './routes/press'
+import { Route as SnapsRouteImport } from './routes/snaps'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as WorkRouteImport } from './routes/work'
 
@@ -54,6 +55,11 @@ const PressRoute = PressRouteImport.update({
   path: '/press',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SnapsRoute = SnapsRouteImport.update({
+  id: '/snaps',
+  path: '/snaps',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudioRoute = StudioRouteImport.update({
   id: '/studio',
   path: '/studio',
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/podcast': typeof PodcastRoute
   '/press': typeof PressRoute
+  '/snaps': typeof SnapsRoute
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/podcast': typeof PodcastRoute
   '/press': typeof PressRoute
+  '/snaps': typeof SnapsRoute
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/podcast': typeof PodcastRoute
   '/press': typeof PressRoute
+  '/snaps': typeof SnapsRoute
   '/studio': typeof StudioRoute
   '/work': typeof WorkRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/podcast'
     | '/press'
+    | '/snaps'
     | '/studio'
     | '/work'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/podcast'
     | '/press'
+    | '/snaps'
     | '/studio'
     | '/work'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/podcast'
     | '/press'
+    | '/snaps'
     | '/studio'
     | '/work'
   fileRoutesById: FileRoutesById
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   PodcastRoute: typeof PodcastRoute
   PressRoute: typeof PressRoute
+  SnapsRoute: typeof SnapsRoute
   StudioRoute: typeof StudioRoute
   WorkRoute: typeof WorkRoute
 }
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/snaps': {
+      id: '/snaps'
+      path: '/snaps'
+      fullPath: '/snaps'
+      preLoaderRoute: typeof SnapsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/studio': {
       id: '/studio'
       path: '/studio'
@@ -223,6 +243,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   PodcastRoute: PodcastRoute,
   PressRoute: PressRoute,
+  SnapsRoute: SnapsRoute,
   StudioRoute: StudioRoute,
   WorkRoute: WorkRoute,
 }

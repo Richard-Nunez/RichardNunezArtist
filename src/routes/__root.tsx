@@ -1,6 +1,7 @@
 import {
   createRootRoute,
   HeadContent,
+  Link,
   Outlet,
   Scripts,
 } from "@tanstack/react-router";
@@ -21,7 +22,6 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      
 
       {
         title: APP_NAME,
@@ -140,18 +140,18 @@ export const Route = createRootRoute({
 
     scripts: [
       {
-  src: "https://www.googletagmanager.com/gtag/js?id=G-6FJN4MDZM9",
-  async: true,
-},
-{
-  children: `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', 'G-6FJN4MDZM9');
-  `,
-},
+        src: "https://www.googletagmanager.com/gtag/js?id=G-6FJN4MDZM9",
+        async: true,
+      },
+      {
+        children: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', 'G-6FJN4MDZM9');
+        `,
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -166,6 +166,8 @@ export const Route = createRootRoute({
       },
     ],
   }),
+
+  notFoundComponent: NotFoundPage,
 
   component: () => (
     <html
@@ -191,3 +193,28 @@ export const Route = createRootRoute({
     </html>
   ),
 });
+
+function NotFoundPage() {
+  return (
+    <main className="mx-auto flex min-h-[75dvh] max-w-5xl flex-col justify-center px-5 pb-20 pt-52 md:px-8">
+      <p className="text-xs tracking-[0.3em] text-gilt uppercase">
+        404
+      </p>
+
+      <h1 className="mt-3 font-display text-5xl leading-tight md:text-7xl">
+        Page not found.
+      </h1>
+
+      <p className="mt-5 max-w-xl text-lg text-paper-dim">
+        The page you were looking for does not exist or may have moved.
+      </p>
+
+      <Link
+        to="/"
+        className="mt-8 inline-flex min-h-11 w-fit items-center bg-gilt px-6 text-xs tracking-[0.2em] text-ink uppercase transition-transform duration-150 ease-out active:scale-[0.96]"
+      >
+        Return to atelier
+      </Link>
+    </main>
+  );
+}

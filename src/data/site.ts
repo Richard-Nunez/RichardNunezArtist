@@ -4,12 +4,12 @@ export const SITE = {
   domain: "richardnunezartist.com",
   tagline: "Live acrylic. Icons. Dallas light.",
   email: "studio@richardnunezartist.com",
-  instagram: "https://www.instagram.com/thereallypodcast_/",
+  instagram: "https://www.instagram.com/nunezart1/",
   wikipedia: "https://en.wikipedia.org/wiki/Richard_Nunez_(artist)",
 } as const;
 
 export const SOCIALS = [
-  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/thereallypodcast_/" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/nunezart1/" },
   { id: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=61572478822009" },
   { id: "youtube", label: "YouTube", href: "https://www.youtube.com/@thereallypodcast" },
   { id: "x", label: "X", href: "https://x.com/thereallypodcst" },
@@ -29,6 +29,7 @@ export const MANAGER = {
 export const NAV = [
   { to: "/", label: "Atelier" },
   { to: "/work", label: "Works" },
+  { to: "/snaps", label: "Snaps" },
   { to: "/bio", label: "Life" },
   { to: "/studio", label: "Studio" },
   { to: "/album", label: "Album" },
@@ -3587,6 +3588,38 @@ export const TRACKS = [
   { n: 17, title: "Bad Pretty Irish Girls", time: "1:16", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e7/63/37/e763370e-285f-0c6e-de4e-54efc0167641/mzaf_17414544772740224678.plus.aac.p.m4a" },
 ] as const;
 
+export const LOVE = {
+  artist: "Mr. Really?!",
+  title: "Love Never Fails",
+  released: "October 3, 2026",
+  genre: "Christian",
+  label: "Really Establishment",
+  copyright: "℗ 2026 Really Establishment",
+  tracks: 15,
+  cover: "/images/love-never-fails-cover.jpg",
+  stores: [
+    { id: "apple", label: "Apple Music", href: "https://music.apple.com/us/album/love-never-fails/6818945791" },
+  ],
+} as const;
+
+export const LOVE_TRACKS = [
+  { n: 1, title: "I Love Texas", time: "2:38", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/03/24/bb/0324bb03-2cfe-ea57-2c28-268f61cf3c89/mzaf_11151179063915447858.plus.aac.p.m4a" },
+  { n: 2, title: "World Love", time: "1:32", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b2/88/80/b28880e4-9f14-35d5-b4cd-5ee2e69323d0/mzaf_90602035343351852.plus.aac.p.m4a" },
+  { n: 3, title: "A Love Song", time: "1:08", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/57/b8/e4/57b8e4db-f8ce-d870-0dcc-5a7647dbcd85/mzaf_13532205654809084501.plus.aac.p.m4a" },
+  { n: 4, title: "Love, From Dios", time: "1:42", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/04/be/0c/04be0c55-a50b-42ce-38d1-86a239e47f62/mzaf_8771579508963414333.plus.aac.p.m4a" },
+  { n: 5, title: "Love, Bob", time: "1:53", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ad/89/ae/ad89ae47-b405-f91f-cf78-33b936b5a6da/mzaf_457569620323016013.plus.aac.p.m4a" },
+  { n: 6, title: "Winter \"Love\" Land", time: "1:12", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7e/74/43/7e744323-b5fd-2369-da0f-67b78832b80e/mzaf_17726388253664273346.plus.aac.p.m4a" },
+  { n: 7, title: "Hear My Love", time: "2:02", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0a/b0/f3/0ab0f39a-9a14-74d1-6be9-1fe2ee5ef364/mzaf_15062477599015344630.plus.aac.p.m4a" },
+  { n: 8, title: "PS: Love From Tokyo", time: "1:28", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/57/ba/3b/57ba3bef-669c-a0f3-57e1-8019c7e37d39/mzaf_16659564322417314470.plus.aac.p.m4a" },
+  { n: 9, title: "From The Heart", time: "1:53", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0e/4d/b8/0e4db8a0-1f5b-cb9f-6bc5-e73efc936870/mzaf_8721597676559576137.plus.aac.p.m4a" },
+  { n: 10, title: "Heart Rock", time: "1:35", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/db/f8/3e/dbf83eff-3b19-38e9-d44a-cc2c0a82c3cd/mzaf_6775999643405033911.plus.aac.p.m4a" },
+  { n: 11, title: "His Love Is Smooth", time: "2:39", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7e/7c/1a/7e7c1ac2-750e-fbb0-3623-f3c785cd8cb4/mzaf_4177941861262365764.plus.aac.p.m4a" },
+  { n: 12, title: "Never Forget My Love", time: "1:22", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ba/27/27/ba2727a3-0c7c-99bf-6975-9060d9bb940e/mzaf_4781138659392017205.plus.aac.p.m4a" },
+  { n: 13, title: "Memories Of Love", time: "2:16", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/29/fc/8b/29fc8b2a-aa20-00c0-c29c-366ff08558db/mzaf_8069310721077083167.plus.aac.p.m4a" },
+  { n: 14, title: "Real Love", time: "1:33", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e2/8c/76/e28c76b6-71a7-5c13-abe5-afa56b11497e/mzaf_1243873960606088127.plus.aac.p.m4a" },
+  { n: 15, title: "Love For You", time: "1:34", preview: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/db/8b/19/db8b1993-51a4-12e8-953e-48a11273302a/mzaf_15020396782506679022.plus.aac.p.m4a" },
+] as const;
+
 export const SHOW = {
   name: "The Really Podcast",
   host: "Richard Nuñez",
@@ -3933,3 +3966,4 @@ export const ROOMS = [
     body: "He occasionally paints live at III Forks, finishing original works in front of diners. Steak, wine, and a canvas still wet when the table turns.",
   },
 ] as const;
+
