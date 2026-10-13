@@ -4,12 +4,12 @@ export const SITE = {
   domain: "richardnunezartist.com",
   tagline: "Live acrylic. Icons. Dallas light.",
   email: "studio@richardnunezartist.com",
-  instagram: "https://www.instagram.com/nunezart1/",
+  instagram: "https://www.instagram.com/thereallypodcast_/",
   wikipedia: "https://en.wikipedia.org/wiki/Richard_Nunez_(artist)",
 } as const;
 
 export const SOCIALS = [
-  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/nunezart1/" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/thereallypodcast_" },
   { id: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=61572478822009" },
   { id: "youtube", label: "YouTube", href: "https://www.youtube.com/@thereallypodcast" },
   { id: "x", label: "X", href: "https://x.com/thereallypodcst" },
@@ -3597,8 +3597,28 @@ export const LOVE = {
   copyright: "℗ 2026 Really Establishment",
   tracks: 15,
   cover: "/images/love-never-fails-cover.jpg",
+
   stores: [
-    { id: "apple", label: "Apple Music", href: "https://music.apple.com/us/album/love-never-fails/6818945791" },
+    {
+      id: "tidal",
+      label: "Tidal",
+      href: "https://tidal.com/artist/86009356/u",
+    },
+    {
+      id: "spotify",
+      label: "Spotify",
+      href: "https://open.spotify.com/artist/4m3zcjOYj9W5WlBiifF64r",
+    },
+    {
+      id: "apple",
+      label: "Apple Music",
+      href: "https://music.apple.com/us/album/love-never-fails/6818945791",
+    },
+    {
+      id: "amazon",
+      label: "Amazon Music",
+      href: "https://music.amazon.com/artists/B0HJYDCB5F/mr-really",
+    },
   ],
 } as const;
 
@@ -3830,12 +3850,12 @@ export const PRESS: PressItem[] = [
   },
   {
     id: "instagram",
-    title: "@nunezart1",
+    title: "@thereallypodcast_",
     publication: "Instagram",
     date: "c. 2013–2014",
     year: 2013,
     kind: "social",
-    href: "https://www.instagram.com/nunezart1/",
+    href: "https://www.instagram.com/thereallypodcast_/",
     excerpt:
       "Official handle. Bio: “self-taught painter… live artist painting for celebrities.” About 388 followers. Last posts ~12 years ago: studio pours, INK lettering on subway tile, live sessions.",
     featured: true,
@@ -3847,7 +3867,7 @@ export const PRESS: PressItem[] = [
     date: "Archive viewer",
     year: 2014,
     kind: "social",
-    href: "https://imginn.com/nunezart1/",
+    href: "https://imginn.com/thereallypodcast_/",
     excerpt:
       "Third-party viewer for the dormant Instagram grid when Instagram itself rate-limits.",
   },
