@@ -15,6 +15,7 @@ const SITE_URL = "https://richardnunezartist.com";
 
 export const Route = createRootRoute({
   head: () => ({
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="43fad1dd-bc76-4f0b-8958-9cb8e649af63"></script>
     meta: [
       { charSet: "utf-8" },
 
